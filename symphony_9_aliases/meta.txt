@@ -250,11 +250,11 @@ load_8 %dest(register), [%address(immediate)]
 01110000 dddd0000 aaaaaaaa aaaaaaaa
 Loads %address from RAM and stores it to %dest
 
-store_8 %address(register), %value(register)
+store_8 [%address(register)], %value(register)
 01100001 0000vvvv 0000aaaa 00000000
 Store %value to %address in RAM
 
-store_8 %address(immediate), %value(register)
+store_8 [%address(immediate)], %value(register)
 01110001 0000vvvv aaaaaaaa aaaaaaaa
 Store %value to %address in RAM
 
@@ -266,11 +266,11 @@ load_16 %dest(register), [%address(immediate)]
 01110010 dddd0000 aaaaaaaa aaaaaaaa
 Loads %address from RAM and stores it to %dest
 
-store_16 %address(register), %value(register)
+store_16 [%address(register)], %value(register)
 01100011 0000vvvv 0000aaaa 00000000
 Store %value to %address in RAM
 
-store_16 %address(immediate), %value(register)
+store_16 [%address(immediate)], %value(register)
 01110011 0000vvvv aaaaaaaa aaaaaaaa
 Store %value to %address in RAM
 
@@ -282,11 +282,11 @@ pload_8 %dest(register), [%address(immediate)]
 01110100 dddd0000 aaaaaaaa aaaaaaaa
 Loads %address from SSD and stores it to %dest
 
-pstore_8 %address(register), %value(register)
+pstore_8 [%address(register)], %value(register)
 01100101 0000vvvv 0000aaaa 00000000
 Store %value to %address in SSD
 
-pstore_8 %address(immediate), %value(register)
+pstore_8 [%address(immediate)], %value(register)
 01110101 0000vvvv aaaaaaaa aaaaaaaa
 Store %value to %address in SSD
 
@@ -298,11 +298,11 @@ pload_16 %dest(register), [%address(immediate)]
 01110110 dddd0000 aaaaaaaa aaaaaaaa
 Loads %address from SSD and stores it to %dest
 
-pstore_16 %address(register), %value(register)
+pstore_16 [%address(register)], %value(register)
 01100111 0000vvvv 0000aaaa 00000000
 Store %value to %address in SSD
 
-pstore_16 %address(immediate), %value(register)
+pstore_16 [%address(immediate)], %value(register)
 01110111 0000vvvv aaaaaaaa aaaaaaaa
 Store %value to %address in SSD`
 
@@ -310,5 +310,4 @@ default_assembly = `
 in r1
 mov r2, r1
 neg r2, r2
-not r2, r2
-`
+not r2, r2`
