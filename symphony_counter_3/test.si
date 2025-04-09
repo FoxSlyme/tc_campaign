@@ -44,9 +44,9 @@ def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]
 
     }
 
-    if get_probe_value() != scratch_space[MEMORY] {
+    if get_level_memory("count") != scratch_space[MEMORY] {
 
-        let memory_value = get_probe_value()
+        let memory_value = get_level_memory("count")
 
         if memory_value == Z_STATE {
 
@@ -55,7 +55,7 @@ def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]
 
         }
 
-        set_error(`Counter value is supposed to be {scratch_space[MEMORY]}, not {get_probe_value()}`)
+        set_error(`Counter value is supposed to be {scratch_space[MEMORY]}, not {get_level_memory("count")}`)
         return fail
 
     }
