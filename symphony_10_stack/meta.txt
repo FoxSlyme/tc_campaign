@@ -323,7 +323,7 @@ Store %value to %address in SSD
 
 mov %a(register), %b(register)
 00100001 aaaabbbb 00000000 00000000
-Move from %a to %b
+Move from %b to %a
 
 neg %a(register), %b(register)
 00100101 aaaa0000 0000bbbb 00000000
@@ -336,7 +336,7 @@ Not %b and store the result in %a.
 
 mov %a(register), %b(immediate)
 00110001 aaaa0000 bbbbbbbb bbbbbbbb
-Move from %a to %b
+Move from %b to %a
 
 neg %a(register), %b(immediate)
 00110101 aaaa0000 bbbbbbbb bbbbbbbb
@@ -344,5 +344,4 @@ Neg %b and store the result in %a.
 
 not %a(register), %b(immediate)
 00110011 aaaa0000 bbbbbbbb bbbbbbbb
-Not %b and store the result in %a.
-`
+Not %b and store the result in %a.`
