@@ -19,9 +19,11 @@ def get_input($scratch_space: [Int], tick: Int, $inputs: [Int]) {
 
 def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]) TestResult {
 
-    if outputs[0] != (inputs[0] * inputs[1]) & 0xff {
+    let result = (inputs[0] * inputs[1]) & 0xff
 
-        set_error(`{inputs[0]} * {inputs[1]} is {inputs[0] * inputs[1]}`)
+    if outputs[0] != result {
+
+        set_error(`The lower byte of {inputs[0]} * {inputs[1]} is {result}`)
         return fail
 
     }
