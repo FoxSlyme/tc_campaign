@@ -175,10 +175,6 @@ or %a(register), %b(register), %c(immediate)
 00110001 aaaabbbb cccccccc cccccccc
 OR %b and %c and store the result in %a.
 
-or %a(register), %b(register), %c(immediate)
-00110001 aaaabbbb cccccccc cccccccc
-OR %b and %c and store the result in %a.
-
 nor %a(register), %b(register), %c(immediate)
 00110011 aaaabbbb cccccccc cccccccc
 NOR %b and %c and store the result in %a.
