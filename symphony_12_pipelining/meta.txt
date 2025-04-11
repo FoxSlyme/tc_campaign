@@ -29,7 +29,7 @@ Imagine a situation where one instruction stores to a register, at the same time
 [code]neg r1, r3
 mov r4, r1[/code]
 
-For this to work correctly, the register has to output the store value, when both loading and storing in the same tick. You already built this register, add it to the schematic.
+For this to work correctly, the register has to output the store value, when both loading and storing in the same tick. To implement this you can just put both of the register file's load ports [i]below[/i] the store port.
 `),
   (info, `Finally we have to deal with jumps. After we see a jump, we don't know what instructions to load into the pipeline, since we don't know if the jump will be taken or not. We have to wait until the jump reaches stage 3 before we know which instruction to load next.
 
