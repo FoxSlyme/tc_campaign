@@ -41,7 +41,7 @@ Instead of using individual registers, we use a "register file", which is just a
     
 [b]1.[/b] Place a RAM for our program and set the output width it to 32 bit. Click on it, enable assembly and set the byte size to 65536.
 [b]2.[/b] Add a RAM component as our register file. Add one write port at the bottom and two read ports on top (order matters as lower ports happen last).
-[b]3.[/b] Click "Edit link components" on the program component and then "Add register file". (do not connect the zr register)
+[b]3.[/b] Click "Edit link components" on the program component and then "Add register file". (do not remove the zr register's link to the Assembler)
 `),
   (info, `Finally, implement the NAND instruction.
 
