@@ -615,7 +615,7 @@ lsl r10, r11, flags
 xor zr, r4, r12
 or flags, r11, r9
 xor r3, r10, 57299
-pload_16 [r2], 4
+pload_16 r2, [4]
 sub r8, r3, zr
 nor r3, r10, 44884
 and r3, r9, 9312
@@ -804,7 +804,7 @@ or r7, r4, 8414
 lsl r5, flags, r3
 sub r2, r7, 11076
 pstore_16 [494], r10
-load_16 r3, 5380
+load_16 r3, [5380]
 xor r13, r7, r13
 out r8
 lsl r7, r11, flags
