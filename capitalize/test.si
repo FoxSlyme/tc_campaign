@@ -69,7 +69,7 @@ def arch_check_output($scratch_space: [Int], test: Int, input: Int, output: Int)
         if (0x20 <= output) && (output < 0x80) {
             set_error(`Output should have been "{<Char> char}" ({char}), not "{<Char> output}" ({output})`)
         } else {
-            set_error(`Output should have been "{<Char> char}" ({char}), not "unknown character" ({output})`)
+            set_error(`Output should have been "{<Char> char}" ({char}), not unknown character ({output})`)
         }
         return fail
     }

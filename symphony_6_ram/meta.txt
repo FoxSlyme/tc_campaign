@@ -43,9 +43,7 @@ The 'store' instructions should store [color=#66ccff]argument A[/color] at addre
 The numerical suffix determines the width in bits of how many bits should be written to or read from memory, so a load_8 instruction should load 8 bits of data & a store_16 should store 16 bits of data starting at that address.
 `),
     (info, `
-    TODO, write about store pins and ordering and why they must go on top or they will cause a circular dependency
-    TODO, check RAM size is large enough
-    `),
+    TODO, write about store pins and ordering and why they must go on top or they will cause a circular dependency`),
 ]
 default_isa_spec = `
 

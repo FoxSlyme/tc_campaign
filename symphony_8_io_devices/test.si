@@ -405,55 +405,69 @@ def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]
 
     if tick == 0 {
 
+        if get_assembler_little_endian() {
+
+            set_error("The assembler should not be set to little endian")
+            return fail
+
+        }
+
+        if get_assembler_register_count() == 0 {
+
+            set_error(`Connect your registers to the assembler.`)
+            return fail
+
+        } elif get_assembler_register_count() < 15 {
+        
+            set_error(`Connect {15 - get_assembler_register_count()} more registers to the assembler.`)
+            return fail
+        
+        }
+
+        if get_ram_size() != 65536 {
+
+            set_error(`Set program memory RAM size to 65536.`)
+            return fail
+
+        }
+
+        if get_ssd_size() != 65536 {
+
+            set_error(`Set the SSD size to 65536.`)
+            return fail
+
+        }
+
         add_keyboard_value(0x1ff)
         scratch_space[KEYBOARD] = 0x80ff
 
-    }
+        if !has_time_component() {
 
-    if !has_time_component() {
+            set_error(`Place a time component.`)
+            return fail
 
-        set_error(`Place a time component.`)
-        return fail
+        }
 
-    }
+        if !has_keyboard_component() {
 
-    if !has_keyboard_component() {
+            set_error(`Place a keyboard component.`)
+            return fail
 
-        set_error(`Place a keyboard component.`)
-        return fail
+        }
 
-    }
+        if !has_console_component() {
 
-    if !has_console_component() {
+            set_error(`Place a console component.`)
+            return fail
 
-        set_error(`Place a console component.`)
-        return fail
+        }
 
-    }
-
-    if get_assembler_register_count() == 0 {
-
-        set_error(`Connect your registers to the assembler.`)
-        return fail
-
-    } elif get_assembler_register_count() < 15 {
-    
-        set_error(`Connect {15 - get_assembler_register_count()} more registers to the assembler.`)
-        return fail
-    
     }
 
     if get_program_address() != scratch_space[COUNTER_0] {
 
         ui_set_text("description", "???")
         set_error(`You should read address {scratch_space[COUNTER_0]} from the assembler, not {val_str(get_program_address())}.`)
-        return fail
-
-    }
-
-    if get_assembler_little_endian() {
-
-        set_error("The assembler should not be set to little endian")
         return fail
 
     }
@@ -502,22 +516,14 @@ def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]
     }
 
     {
-
-        if get_ram_size() != 65536 {
-
-            set_error(`Set RAM size to 65536.`)
-            return fail
-
-        }
-
         var addr = 0
-        while addr < 0xfffe {
+        while addr < 0xffff {
 
             let value = get_ram_value(addr)
 
             if value != scratch_space[RAM + addr] {
 
-                set_error(`Memory should contain value {scratch_space[RAM + addr]}, at address {addr}, not {val_str(value)}.`)
+                set_error(`Program memory should contain value {scratch_space[RAM + addr]}, at address {addr}, not {val_str(value)}.`)
                 return fail
 
             }
@@ -529,16 +535,8 @@ def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]
 
     
     {
-
-        if get_ssd_size() != 65536 {
-
-            set_error(`Set the SSD size to 65536.`)
-            return fail
-
-        }
-
         var addr = 0
-        while addr < 0xfffe {
+        while addr < 0xffff {
 
             let value = get_ssd_value(addr)
 

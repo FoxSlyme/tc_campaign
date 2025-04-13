@@ -155,29 +155,38 @@ def get_input($scratch_space: [Int], tick: Int, $inputs: [Int]) { }
 
 def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]) TestResult {
 
+    if tick == 0 {
 
-    if get_assembler_little_endian() {
+        if get_assembler_little_endian() {
 
-        set_error("The assembler should not be set to little endian")
-        return fail
+            set_error("The assembler should not be set to little endian")
+            return fail
 
-    }
-    
-    if get_assembler_register_count() == 0 {
+        }
+        
+        if get_assembler_register_count() == 0 {
 
-        set_error(`Connect your registers to the assembler`)
-        return fail
+            set_error(`Connect your registers to the assembler`)
+            return fail
 
-    } elif get_assembler_register_count() < 16 {
-    
-        set_error(`Connect {16 - get_assembler_register_count()} more registers to the assembler`)
-        return fail
-    
-    } elif get_assembler_register_count() > 16 {
+        } elif get_assembler_register_count() < 16 {
+        
+            set_error(`Connect {16 - get_assembler_register_count()} more registers to the assembler`)
+            return fail
+        
+        } elif get_assembler_register_count() > 16 {
 
-        set_error(`You should only connect 16 registers to the assembler. No need to connect the zr register since it is always zero.`)
-        return fail
+            set_error(`You should only connect 16 registers to the assembler, but you need to connect the zr register, even if it is always zero.`)
+            return fail
 
+        }
+
+        if get_ram_size() != 65536 {
+
+            set_error(`Set program memory RAM size to 65536.`)
+            return fail
+
+        }
     }
 
     if get_program_address() != tick * 4 {

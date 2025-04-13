@@ -251,18 +251,33 @@ def get_input($scratch_space: [Int], tick: Int, $inputs: [Int]) {
 
 def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]) TestResult {
 
-    if get_assembler_little_endian() {
+    if tick == 0 {
 
-        set_error("The assembler should not be set to little endian")
-        return fail
+        if get_assembler_little_endian() {
 
-    }
-    
-    if get_assembler_register_count() < 6 {
-    
-        set_error(`Connect {6 - get_assembler_register_count()} more registers to the assembler`)
-        return fail
-    
+            set_error("The assembler should not be set to little endian")
+            return fail
+
+        }
+        
+        if get_assembler_register_count() == 0 {
+
+            set_error(`Connect your registers to the assembler`)
+            return fail
+
+        } elif get_assembler_register_count() < 16 {
+        
+            set_error(`Connect {16 - get_assembler_register_count()} more registers to the assembler`)
+            return fail
+        
+        }
+
+        if get_ram_size() != 65536 {
+
+            set_error(`Set program memory RAM size to 65536.`)
+            return fail
+
+        }
     }
 
     if get_program_address() != tick * 4 {

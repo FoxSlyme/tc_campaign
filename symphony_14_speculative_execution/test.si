@@ -496,7 +496,41 @@ def get_input($scratch_space: [Int], tick: Int, $inputs: [Int]) {
 
 def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]) TestResult {
 
-    // Update everything except counter
+    if tick == 0 {
+
+        if get_assembler_little_endian() {
+
+            set_error("The assembler should not be set to little endian")
+            return fail
+
+        }
+
+        if get_assembler_register_count() == 0 {
+
+            set_error(`Connect your registers to the assembler`)
+            return fail
+
+        } elif get_assembler_register_count() < 16 {
+        
+            set_error(`Connect {16 - get_assembler_register_count()} more registers to the assembler`)
+            return fail
+        
+        }
+
+        if get_ram_size() != 65536 {
+
+            set_error(`Set program memory RAM size to 65536.`)
+            return fail
+
+        }
+
+        if get_ssd_size() != 65536 {
+
+            set_error(`Set SSD size to 65536.`)
+            return fail
+
+        }
+    }
 
     if get_program_address() != scratch_space[COUNTER_0] {
 
@@ -506,12 +540,7 @@ def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]
 
     }
 
-    if get_assembler_little_endian() {
-
-        set_error("The assembler should not be set to little endian")
-        return fail
-
-    }
+    // Update everything except counter
 
     scratch_space[COUNTER_3] = scratch_space[COUNTER_2]
     scratch_space[COUNTER_2] = scratch_space[COUNTER_1]
@@ -614,26 +643,41 @@ def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]
 
     }
 
-    if get_ram_size() != 65536 {
+    {
+        var addr = 0
+        while addr < 0xffff {
 
-        set_error(`Set RAM size to 65536.`)
-        return fail
+            let value = get_ram_value(addr)
 
-    }
+            if value != scratch_space[RAM + addr] {
 
-    var addr = 0
-    while addr < 0xfffe {
+                set_error(`Program memory should contain value {scratch_space[RAM + addr]}, at address {addr}, not {val_str(value)}.`)
+                return fail
 
-        let value = get_ram_value(addr)
+            }
 
-        if value != scratch_space[RAM + addr] {
-
-            set_error(`Memory should contain value {scratch_space[RAM + addr]}, at address {addr}, not {val_str(value)}.`)
-            return fail
+            addr += 1
 
         }
+    }
 
-        addr += 1
+    
+    {
+        var addr = 0
+        while addr < 0xffff {
+
+            let value = get_ssd_value(addr)
+
+            if value != scratch_space[SSD + addr] {
+
+                set_error(`The SSD should contain value {scratch_space[SSD + addr]}, at address {addr}, not {val_str(value)}.`)
+                return fail
+
+            }
+
+            addr += 1
+
+        }
 
     }
 
