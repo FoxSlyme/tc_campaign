@@ -20,7 +20,7 @@ Stage 3: ALU and save back to registers[/code]
 
 The first two ticks, no instructions finish the last stage, as we are still filling up the pipeline. The initial values of the Delay Lines is 0, which corresponds to the "nop" instruction (no operation / do nothing) so the later stages will not execute anything until real instructions loaded from the assembler reaches them.
 `),
-  (info, `The instruction that reads the counter does so in the second stage. You need to delay the counter value by one tick to make sure it returns the counter value at the time when that instruction was loaded from the assembler.`),
+  (info, `The instruction that reads the counter does so in the third stage. You need to delay the counter value by two ticks to make sure it returns the counter value at the time when that instruction was loaded from the assembler.`),
   (info, `Register loads happen in stage 2, while register stores happen in stage 3.
 
 [img]dialogue/symphony_diagram_3.png[/img]

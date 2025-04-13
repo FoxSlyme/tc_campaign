@@ -376,7 +376,7 @@ def retire_instruction(instruction: Int, $scratch_space: [Int], input: Int) Int 
 def on_reset($scratch_space: [Int], test: Int) {
 
     var addr = 0
-    while addr < 0xfffe {
+    while addr < 0xffff {
 
         scratch_space[RAM + addr] = get_ram_value(addr)
         scratch_space[SSD + addr] = get_ssd_value(addr)
