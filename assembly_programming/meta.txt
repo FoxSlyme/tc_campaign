@@ -1,4 +1,5 @@
 kind = sequential
+immutable_spec = true
 title = "Add 5 again"
 tests = 32
 size = [-80, -50, 43, 45]
