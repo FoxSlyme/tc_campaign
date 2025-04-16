@@ -155,20 +155,23 @@ def get_random_instruction() Int {
 
         OP_IO {
 
-            switch random(3) 
+            let opcode = random(10)
+
+            switch opcode
                 0 { return 0 }
-                1 { return OP_IO << 29 | d_vec }
-                2 { return OP_IO << 29 | 1 << 24 | a_vec }
+                2 { return OP_IO << 29 | opcode << 24 | b_vec }
+                3 { return OP_IO << 29 | opcode << 24 | b_vec }
+                default { return OP_IO << 29 | opcode << 24 | d_vec }
 
         }
 
         OP_ALU {
 
-            let opcode = random(10)
+            let opcode = random(11)
 
             if opcode == 9 {
 
-                return OP_ALU << 29 | opcode << 24 | 6 << 20 | a_vec | b_vec
+                return OP_ALU << 29 | opcode << 24 | 15 << 20 | a_vec | b_vec
 
             }
 
@@ -178,9 +181,9 @@ def get_random_instruction() Int {
         
         OP_RAM {
 
-            let opcode = random(2)
+            let opcode = random(8)
 
-            switch opcode
+            switch opcode & 1
                 0 {
 
                     return OP_RAM << 29 | opcode << 24 | d_vec | b_vec
@@ -188,7 +191,7 @@ def get_random_instruction() Int {
                 }
                 1 {
 
-                    return OP_RAM << 29 | opcode << 24 | 1 << 24 | b_vec | a_vec
+                    return OP_RAM << 29 | opcode << 24 | b_vec | a_vec
 
                 }
 
@@ -201,7 +204,7 @@ def get_random_instruction() Int {
                 opcode = random(14)
             }
 
-            return OP_JMP << 29 | opcode << 24 | 0b111 << 20 | ((b_vec >> 2) << 2) 
+            return OP_JMP << 29 | opcode << 24 | 0b1111 << 20 | ((b_vec >> 2) << 2) 
 
         }
 
@@ -224,13 +227,13 @@ def get_input($scratch_space: [Int], tick: Int, $inputs: [Int]) {
 def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]) TestResult {
 
     let instruction_0 = inputs[0]
-    let mode_a        = (instruction_0 >> 29)
-    let dest_a        = (instruction_0 >> 20) & 0b111
+    let mode_a        = (instruction_0 >> 29) & 0b11
+    let dest_a        = (instruction_0 >> 20) & 0b1111
 
     let instruction_1 = inputs[1]
-    let mode_b        = (instruction_1 >> 29)
-    let a             = (instruction_1 >> 16) & 0b111
-    let b             = (instruction_1 >> 8) & 0b111
+    let mode_b        = (instruction_1 >> 29) & 0b11
+    let a             = (instruction_1 >> 16) & 0b1111
+    let b             = (instruction_1 >> 8) & 0b1111
     let immediate     = (instruction_1 >> 28) & 1 != 0
 
     let is_enabled = outputs[0] == 1
