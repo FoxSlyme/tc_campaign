@@ -141,20 +141,23 @@ def get_random_wide_instruction() Int {
 
         OP_IO {
 
-            switch random(3) 
+            let opcode = random(10)
+
+            switch opcode
                 0 { return 0 }
-                1 { return OP_IO << 29 | d_vec | d_ext }
-                2 { return OP_IO << 29 | 1 << 24 | a_vec | a_ext }
+                2 { return OP_IO << 29 | opcode << 24 | b_vec | b_ext }
+                3 { return OP_IO << 29 | opcode << 24 | b_vec | b_ext }
+                default { return OP_IO << 29 | d_vec | d_ext }
 
         }
 
         OP_ALU {
 
-            let opcode = random(10)
+            let opcode = random(11)
 
             if opcode == 9 {
 
-                return OP_ALU << 29 | opcode << 24 | 6 << 20 | a_vec | a_ext | b_vec | b_ext
+                return OP_ALU << 29 | opcode << 24 | 15 << 20 | a_vec | a_ext | b_vec | b_ext
 
             }
 
@@ -164,9 +167,9 @@ def get_random_wide_instruction() Int {
         
         OP_RAM {
 
-            let opcode = random(2)
+            let opcode = random(8)
 
-            switch opcode
+            switch opcode & 1
                 0 {
 
                     return OP_RAM << 29 | opcode << 24 | d_vec | d_ext | b_vec | b_ext
@@ -174,7 +177,7 @@ def get_random_wide_instruction() Int {
                 }
                 1 {
 
-                    return OP_RAM << 29 | opcode << 24 | 1 << 24 | b_vec | b_ext | a_vec | a_ext
+                    return OP_RAM << 29 | opcode << 24 | b_vec | b_ext | a_vec | a_ext
 
                 }
 
@@ -187,7 +190,7 @@ def get_random_wide_instruction() Int {
                 opcode = random(14)
             }
 
-            return OP_JMP << 29 | opcode << 24 | 0b111 << 20 | ((b_vec >> 2) << 2) | b_ext
+            return OP_JMP << 29 | opcode << 24 | 0b1111 << 20 | ((b_vec >> 2) << 2) | b_ext
 
         }
 
