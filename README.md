@@ -3,7 +3,7 @@ where I fixed the level test logic for the `Symphony` architecture creation leve
 
 To install this, simply open your `[game install location]\campaign` folder,
 delete or move out all of it's contents apart from file `.DS_store` & then copy
-the contents of this repository (apart from `.gitattributes` & `.gitignore` files)
+the contents of this repository (apart from `.gitattributes`, `.gitignore` & `RADME.md` files)
 into that folder.
 
 It is advised that you do this when the game isn't running.
