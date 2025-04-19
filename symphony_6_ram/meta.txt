@@ -6,9 +6,11 @@ immutable_spec = true
 no_score = true
 copy_solution_to_level = ["symphony_7_ssd"]
 dialogue = [
-    (info, `In this level we add loading and storing from memory. We store and load from the same memory that is used for the program, so add extra load and store pin to the RAM component. 
+    (info, `In this level we add loading from and storing to the same memory that is used for the program. We want to be able to read and write both 16-bit words and 8-bit bytes, so add 2 store ports and 2 extra load ports to the RAM component. 
 
-The top input will be for a new memory reading capability, so set it's width to 16. Set the width of the second pin to 32, since this will be used to read our instructions.`)
+Set the width of top load port to 8, the middle one to 16 (these will be used for the new memory reading capability) and the bottom one to 32 (which will be used to read our instructions).
+
+Set the width of top store port to 8 and the bottom one to 16.`)
     (info, `Once again, these are the [color=#ff9800]Modes[/color] of [color=#e49f44]Symphony[/color]:
 
 [code]0 IO
@@ -128,7 +130,7 @@ LSR %b and %c and store the result in %a.
 
 cmp %a(register), %b(register)
 00101001 1111aaaa 0000bbbb 00000000
-Compares %a and %b and store the resulting flags in r6.
+Compares %a and %b and store the resulting flags in 'flags'.
 
 mul %a(register), %b(register), %c(register)
 00101010 aaaabbbb 0000cccc 00000000
@@ -173,7 +175,7 @@ LSR %b and %c and store the result in %a.
 
 cmp %a(register), %b(immediate)
 00111001 1111aaaa bbbbbbbb bbbbbbbb
-Compares %a and %b and store the resulting flags in r6.
+Compares %a and %b and store the resulting flags in 'flags'.
 
 mul %a(register), %b(register), %c(immediate)
 00111010 aaaabbbb cccccccc cccccccc

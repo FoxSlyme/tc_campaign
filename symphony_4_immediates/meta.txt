@@ -109,7 +109,7 @@ LSR %b and %c and store the result in %a.
 
 cmp %a(register), %b(register)
 00101001 1111aaaa 0000bbbb 00000000
-Compares %a and %b and store the resulting flags in r6.
+Compares %a and %b and store the resulting flags in 'flags'.
 
 mul %a(register), %b(register), %c(register)
 00101010 aaaabbbb 0000cccc 00000000
@@ -154,7 +154,7 @@ LSR %b and %c and store the result in %a.
 
 cmp %a(register), %b(immediate)
 00111001 1111aaaa bbbbbbbb bbbbbbbb
-Compares %a and %b and store the resulting flags in r6.
+Compares %a and %b and store the resulting flags in 'flags'.
 
 mul %a(register), %b(register), %c(immediate)
 00111010 aaaabbbb cccccccc cccccccc
