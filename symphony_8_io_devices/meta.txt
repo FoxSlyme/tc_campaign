@@ -19,10 +19,10 @@ Also link the Console to RAM.
 1  in        Input
 2  out       Output
 3  console   Set the console offset
-4  time_0    Read the first 16 bits of time
+4  time_0    Read the least significant 16 bits of time
 5  time_1    Read the second 16 bits of time
 6  time_2    Read the third 16 bits of time
-7  time_3    Read the last 16 bits of time
+7  time_3    Read the most significant 16 bits of time
 8  counter   Read the counter value
 9  keyboard  Read the keyboard value
 [/code]
@@ -97,7 +97,7 @@ Stores the value of %a in the console offset register
 
 time_0 %a(register)
 00000100 aaaa0000 00000000 00000000
-Loads the first two bytes of the time value and stores it to %a
+Loads the two least significant bytes of the time value and stores it to %a
 
 time_1 %a(register)
 00000101 aaaa0000 00000000 00000000
@@ -109,7 +109,7 @@ Loads the third two bytes of the time value and stores it to %a
 
 time_3 %a(register)
 00000111 aaaa0000 00000000 00000000
-Loads the fourth two bytes of the time value and stores it to %a
+Loads the two most significant bytes of the time value and stores it to %a
 
 counter %a(register)
 00001000 aaaa0000 00000000 00000000
