@@ -245,7 +245,7 @@ def check_output($scratch_space: [Int], tick: Int, inputs: [Int], outputs: [Int]
 
         if is_enabled {
 
-            set_error(`Only one instruction can execute, since instruction A isn't an ALU instruction.`)
+            set_error(`Only one instruction can execute, since instruction A is a JUMP instruction.`)
             return fail
 
         }

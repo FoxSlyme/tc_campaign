@@ -39,9 +39,11 @@ Most instructions take 2 arguments and produce 1 result (like ADD, OR etc).
 Instead of using individual registers, we use a "register file", which is just a RAM component.`),
   (info, `Do the following to complete this level:
     
-[b]1.[/b] Place a RAM for our program memory, click on it, enable assembly and set the byte size to 65536. Add a load port component to it and set the the port's width to 32 bit.
-[b]2.[/b] Set the bit size tool to 16 bits, and then add a RAM component as our register file. Add one write port at the bottom and two read ports on top (order matters as lower ports happen last).
-[b]3.[/b] Open the Assembler UI (by clicking on the button in the top right corner of the program memory component), click the padlock button next to the "Registers" text and then "Add register file". This will allow you to select the register file RAM component & then will prompt you to specify the number of registers to add. Do not remove the zr register's link to the Assembler.
+[b]1.[/b] Set the bit size tool to 16 bits, and then add a RAM component as our register file. Add one store port at the bottom and two load ports on top (order matters as lower ports happen last).
+[b]2.[/b] Set the bit size tool to 32 bits, place a RAM for our program memory, click on it, enable assembly and set the byte size to 65536. Add a load port component to it and set the the port's width to 32 bit.
+[b]3.[/b] Open the Assembler UI (by clicking on the button in the top right corner of the program memory component), click the padlock button next to the "Registers" text and then "from register file". This will allow you to select the register file RAM component & then will prompt you to specify the number of registers to add (you need 16). Do not remove the zr register's link to the Assembler.
+
+It's important to do things in this order, or else the game might be confused about which RAM is which.
 `),
   (info, `Finally, implement the NAND instruction.
 
@@ -56,7 +58,9 @@ This is how the instructions are encoded:
 
 [code][color=#bbbbbb]0[/color][color=#ff9800]MM[/color][color=#bbbbbb]0[/color][color=#ff6680]OOOO[/color] [color=#ffe666]DDDD[/color][color=#66ff99]AAAA[/color] [color=#bbbbbb]0000[/color][color=#66ccff]BBBB[/color] [color=#bbbbbb]00000000[/color][/code]
 
-Use the decoder to separate the destination and argument registers. Also, in this level the [color=#ff9800]Mode[/color] is always 3 and the [color=#ff6680]Opcode[/color] is always 0. This means we NAND the first argument with the second and store the result to the result register. 
+Use the decoder to separate the destination and argument registers. Be careful: load and store ports accept the address in bytes, but each of the registers takes up 2 bytes. This means you need to provide the address of the register, not its index.
+
+Also, in this level the [color=#ff9800]Mode[/color] is always 3 and the [color=#ff6680]Opcode[/color] is always 0. This means we NAND the first argument with the second and store the result to the result register. 
 
 
 [img]dialogue/symphony_diagram_1.png[/img]

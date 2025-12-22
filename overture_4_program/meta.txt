@@ -8,7 +8,7 @@ copy_solution_to_level = ["overture_5_conditionals"]
 unlocks_components = [com_load_port]
 add_components = [com_load_port: -1]
 dialogue = [
-  (info, "The [INSTRUCTION] input component has been removed. It has been replaced by a program component. Every tick, use the counter to load the next [INSTRUCTION] from the program's memory.
+  (info, "The [INSTRUCTION] input component has been removed. It has been replaced by a RAM component containing the program, with a Load port attached to read values from it. When the port is enabled by a Load pin, it will output a value from the specified address. Every tick, use the counter to load the next [INSTRUCTION] from the program's memory.
   
 You must use the counter component you unlocked earlier for this level."),
   (overture),

@@ -11,5 +11,7 @@ dialogue = [
 Flags:
 Set bit 0 to 1 if the inputs are equal.
 Set bit 1 to 1 if the first input is unsigned less than the second input.
-Set bit 2 to 1 if the first input is signed less than the second input.`),
+Set bit 2 to 1 if the first input is signed less than the second input.
+
+To learn about making 16 bit components, open "Symphony counter" level first if you haven't already.`),
 ]

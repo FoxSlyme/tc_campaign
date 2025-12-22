@@ -18,7 +18,5 @@ A: The first instruction is a JUMP.
 
 B: When the second instruction uses the destination register of the first instruction. In this case we have to wait for the first instruction before we can load the updated register value.
 
-C: The second pipeline is only allowed to execute ALU instructions. There are many issues with having the second pipeline execute IO, JUMP or RAM instructions. For example, we only have one RAM component, so we can't execute load / stores at different addresses in the same tick. Also, we only have one level input component, two "in" instructions in the same tick would only read from it once.
-
-`),
+C: The second pipeline is only allowed to execute ALU instructions. There are many issues with having the second pipeline execute IO, JUMP or RAM instructions. For example, we only have one RAM component, so we can't execute load / stores at different addresses in the same tick. Also, we only have one level input component, two "in" instructions in the same tick would only read from it once.`),
 ]

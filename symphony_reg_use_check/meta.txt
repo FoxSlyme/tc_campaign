@@ -7,7 +7,7 @@ input_labels = ["Instruction", "Register"]
 output_labels = ["In use"]
 background = 6
 dialogue = [
-  (info, `This level gives you an instruction and a register. Output 1 if the instruction depends on the register for argument A or argument B.
+  (info, `This level gives you an instruction and a register address. Output 1 if argument A or argument B of the instruction depend on the register at the given address.
 
 However, never output 1 if the register is 0. Also, ignore argument B if the immediate bit is set.
 

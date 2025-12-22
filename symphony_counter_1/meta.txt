@@ -8,6 +8,11 @@ input_labels = ["STORE", "STORE VALUE"]
 output_labels = ["OUTPUT"]
 add_components = [com_probe_memory_word: -1]
 dialogue = [
-    (info, `Build a 16 bit counter that increments by 4 by default, but can alternatively be overwritten with a specific value.`),
-    (info, `Like in the register level, connect a memory probe to the counter value.`),
+    (info, `Build a 16 bit counter that increments by 4 by default, but can alternatively be overwritten with a specific value.
+
+Also, connect a memory probe to a 16-bit component holding the counter memory value.`),
+    (info, `To change word component width, you will need to use a Bit size tool near the left panel (looks like a bidirectional arrow and a number). If the tool doesn't show up, go to the Sandbox and then return back to the level. Do this every time you need the tool if it's missing.`),
+    (info, `Right click on the Bit size tool to specify the target width.
+Left click on components when the tool is active will set the component's bit width.
+Newly placed word components will have this bit width by default.`),
 ]
